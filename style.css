@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Trispace:wght@200;400;600;700&display=swap');
 
 * {
@@ -55,6 +55,7 @@ input:focus {
 .user-info {
     color      : white;
     margin-left: 2rem;
+    z-index    : 2;
 }
 
 .user-info h2 {
@@ -93,22 +94,33 @@ input:focus {
 }
 
 .year-bg {
-    font-family   : 'Trispace', sans-serif;
-    font-size     : 22rem;
-    text-transform: uppercase;
-    position      : absolute;
-    color         : rgba(255, 255, 255, 0.02);
-    top           : 0;
-    right         : 0;
-    padding-left  : 15rem;
-    padding-top   : 2rem;
-    overflow      : hidden;
-    z-index       : -1;
-    user-select   : none;
+    font-family: 'Trispace', sans-serif;
+    font-size  : 12rem;
+    color      : white;
+    opacity    : 0.05;
+    line-height: 0.75;
+    z-index    : 1;
+    width      : 0px;
+    height     : 0px;
+    user-select: none;
 }
 
 .icon {
     padding-left: 15px;
-    font-size: 0.9rem;
-    color: #1DA1F2;
+    font-size   : 0.9rem;
+    color       : #1DA1F2;
+}
+
+main {
+    z-index: 2;
+}
+
+.img-profile {
+    z-index: 1;
+}
+
+a:visited,
+a:link {
+    color          : white;
+    text-decoration: none;
 }

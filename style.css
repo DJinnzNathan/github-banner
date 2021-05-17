@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Trispace:wght@200;400;600;700&display=swap');
 
 * {
     box-sizing: border-box;
@@ -24,7 +25,7 @@ input {
     font-family     : inherit;
     font-size       : 1rem;
     padding         : 1rem;
-    margin-bottom   : 2rem;
+    margin          : 2rem;
 }
 
 input::placeholder {
@@ -74,18 +75,34 @@ input:focus {
 }
 
 .user-info ul li strong {
-    font-size  : 0.9rem;
-    margin-left: 0.5rem;
+    font-size   : 0.9rem;
+    margin-left : 0.5rem;
+    margin-right: 0.2rem;
 }
 
 .repo {
     background-color: #2a2a72;
-    border-radius: 5px;
-    display: inline-block;
-    color: white;
-    font-size: 0.7rem;
-    padding: 0.25rem 0.5rem;
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
-    text-decoration: none;
+    border-radius   : 5px;
+    display         : inline-block;
+    color           : white;
+    font-size       : 0.7rem;
+    padding         : 0.25rem 0.5rem;
+    margin-right    : 0.5rem;
+    margin-bottom   : 0.5rem;
+    text-decoration : none;
+}
+
+.year-bg {
+    font-family   : 'Trispace', sans-serif;
+    font-size     : 22rem;
+    text-transform: uppercase;
+    position      : absolute;
+    color         : rgba(255, 255, 255, 0.02);
+    top           : 0;
+    right         : 0;
+    padding-left  : 15rem;
+    padding-top   : 2rem;
+    overflow      : hidden;
+    z-index       : -1;
+    user-select   : none;
 }

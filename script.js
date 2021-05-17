@@ -4,7 +4,7 @@ const main = document.getElementById('main');
 const form = document.getElementById('form');
 const search = document.getElementById('search');
 
-getUser("florinpop17");
+getUser("DJinnzNathan");
 
 async function getUser(username) {
     const resp = await fetch(APIURL + username);
@@ -26,13 +26,15 @@ async function getRepos(username) {
 function createUserCard(user) {
     const cardHTML = `
         <div class="card">
+        <div class="year-bg"><b>${user.created_at.slice(0,4)}</b></div>
             <div>
-                <img class="avatar" src="${user.avatar_url}" alt="${user.name}" />
+                <a href="${user.html_url}" target="_blank"><img class="avatar" src="${user.avatar_url}" alt="${user.name}" /></a>
             </div>
 
             <div class="user-info">
                 <h2>${user.name}</h2>
                 <p>${user.bio}</p>
+                <p>${user.location}</p>
 
                 <ul class="info">
                     <li>${user.followers}<strong>Followers</strong></li>

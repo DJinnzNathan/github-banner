@@ -106,3 +106,9 @@ input:focus {
     z-index       : -1;
     user-select   : none;
 }
+
+.icon {
+    padding-left: 15px;
+    font-size: 0.9rem;
+    color: #1DA1F2;
+}

@@ -32,7 +32,7 @@ function createUserCard(user) {
             </div>
 
             <div class="user-info">
-                <h2>${user.name}</h2>
+                <h2>${user.name}<a href="https://twitter.com/${user.twitter_username}" target="_blank"><i class="icon fab fa-twitter"></i></a></h2>
                 <p>${user.bio}</p>
                 <p>${user.location}</p>
 

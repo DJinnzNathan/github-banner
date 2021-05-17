@@ -1,6 +1,5 @@
 const APIURL = 'https://api.github.com/users/';
-// const WAPIURL = 'api.openweathermap.org/data/2.5/weather?q={CITYNAME}&appid={APIKEY}';
-// d2fe54a679c5bff6646febe2654c5695
+const KEY = '';
 
 const main = document.getElementById('main');
 const form = document.getElementById('form');
@@ -31,7 +30,7 @@ async function getWeather(username) {
     const resp = await fetch(APIURL + username);
     const respData = await resp.json();
 
-    const wea = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + respData.location + '&units=metric&lang=de&appid=d2fe54a679c5bff6646febe2654c5695')
+    const wea = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + respData.location + '&units=metric&lang=de&appid=' + KEY);
     const weaData = await wea.json();
 
     console.log(weaData.name);

@@ -1,5 +1,5 @@
 const APIURL = 'https://api.github.com/users/';
-// const WAPIURL = 'api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}';
+// const WAPIURL = 'api.openweathermap.org/data/2.5/weather?q={CITYNAME}&appid={APIKEY}';
 // d2fe54a679c5bff6646febe2654c5695
 
 const main = document.getElementById('main');
@@ -36,6 +36,9 @@ async function getWeather(username) {
 
     console.log(weaData.name);
     console.log(weaData.main['temp']);
+    console.log(weaData.sys['country']);
+
+    createWeather(weaData);
 }
 
 
@@ -50,7 +53,7 @@ function createUserCard(user) {
             <div class="user-info">
                 <h2>${user.name}<a href="https://twitter.com/${user.twitter_username}" target="_blank"><i class="icon fab fa-twitter"></i></a></h2>
                 <p>${user.bio}</p>
-                <p>${user.location}<div id="weather"></div></p>
+                <p><img id="loc-flag"><b>${user.location}</b><i id="weather"></i></p>
 
                 <ul class="info">
                     <li><a href="${user.html_url}?tab=followers" target="_blank">${user.followers}<strong>Followers</strong></a></li>
@@ -86,11 +89,12 @@ function addReposToCard(repos) {
         })
 }
 
-function createWeather(weather) {
+function createWeather(weatherData) {
     const weaEl = document.getElementById("weather");
 
-    weather
-
+    weaEl.innerHTML = weatherData.main['temp'] + "°C" + '<img id="weather-icon" src="http://openweathermap.org/img/wn/' + weatherData.weather[0]['icon'] + '@2x.png">';
+    console.log(weatherData.weather[0]['icon']);
+    document.getElementById("loc-flag").src = "https://www.countryflags.io/" + weatherData.sys['country'] + "/flat/64.png";
 }
 
 form.addEventListener("submit", (e) => {

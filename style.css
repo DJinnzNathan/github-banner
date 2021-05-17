@@ -124,3 +124,33 @@ a:link {
     color          : white;
     text-decoration: none;
 }
+
+#weather {
+    user-select: none;
+    margin-left: 15px;
+    font-size  : .85rem;
+    opacity    : 0.7;
+}
+
+/* #weather::after{
+    content: "°C";
+} */
+
+#weather-icon {
+    size          : 0.4rem;
+    width         : 2.5rem;
+    vertical-align: -15px;
+}
+
+#loc-flag {
+    border-radius: 10em;
+    display: inline-block;
+    /* background-image: url(https://www.countryflags.io/DE/flat/64.png); */
+    height: 1em;
+    width: 1em;
+    vertical-align: sub;
+    margin-bottom: 2px;
+    margin-right: 2px;
+    background-size: 175%;
+    background-position: center;
+}

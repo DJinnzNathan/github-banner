@@ -23,10 +23,12 @@ async function getUser(username) {
     getProfileName(respData);
     getProfileBio(respData);
     getLocationData(respData);
+    getFollowers(respData);
+    getFollowing(respData);
+    getReposCount(respData);
 
-    // createUserCard(respData);
     getWeather(username);
-    // getRepos(username);
+    getRepos(username);
 }
 function getYearCreated(user) {
     const yearEl = document.getElementById('year-bg');
@@ -75,6 +77,30 @@ function createUserCard(user) {
 
 
 
+}
+
+function getFollowers(user) {
+    const followersEl = document.getElementById('user-followers');
+    const followers = `
+    <a href="${user.html_url}?tab=followers" target="_blank">${user.followers}<strong>Followers</strong></a>
+    `;
+    followersEl.innerHTML = followers;
+}
+
+function getFollowing(user) {
+    const followingEl = document.getElementById('user-following');
+    const following = `
+    <a href="${user.html_url}?tab=following" target="_blank">${user.following}<strong>Followers</strong></a>
+    `;
+    followingEl.innerHTML = following;
+}
+
+function getReposCount(user) {
+    const repoCountEl = document.getElementById('user-repos');
+    const repoCount = `
+    <a href="${user.html_url}?tab=repositories" target="_blank">${user.public_repos}<strong>Repos</strong></a>
+    `;
+    repoCountEl.innerHTML = repoCount;
 }
 
 async function getWeather(username) {

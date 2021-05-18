@@ -1,0 +1,13 @@
+{
+    "openWeather": {
+        "url": {
+            "base": "api.openweathermap.org/data/2.5/weather?q={CITYNAME}&units=metric&lang=de&appid={APIKEY}",
+            "icon": "http://openweathermap.org/img/wn/{WEATHERICON}@2x.png",
+            "flag": "https://www.countryflags.io/{FLAGICON}/flat/64.png"
+        },
+        "key": "d2fe54a679c5bff6646febe2654c5695"
+    },
+    "github": {
+        "url": "https://api.github.com/users/"
+    }
+}

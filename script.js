@@ -1,5 +1,4 @@
-const APIURL = 'https://api.github.com/users/';
-const DATA = 'apidata.json';
+const DATA = 'default.json';
 
 const main = document.getElementById('main');
 const form = document.getElementById('form');
@@ -8,10 +7,8 @@ const search = document.getElementById('search');
 getUser("DJinnzNathan");
 
 async function getUser(username) {
-    var request = new XMLHttpRequest();
-    request.open("GET", DATA, false);
-    request.send(null);
-    var localJSON = JSON.parse(request.responseText);
+
+    var localJSON = setJSONObj(DATA);
 
     const resp = await fetch(localJSON.github['url'] + username);
     const respData = await resp.json();
@@ -27,8 +24,8 @@ async function getUser(username) {
     getFollowing(respData);
     getReposCount(respData);
 
-    getWeather(username);
-    getRepos(username);
+    getWeather(respData, localJSON);
+    getRepos(username, localJSON);
 }
 function getYearCreated(user) {
     const yearEl = document.getElementById('year-bg');
@@ -103,12 +100,8 @@ function getReposCount(user) {
     repoCountEl.innerHTML = repoCount;
 }
 
-async function getWeather(username) {
-
-    const resp = await fetch(APIURL + username);
-    const respData = await resp.json();
-
-    const wea = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + respData.location + '&units=metric&lang=de&appid=d2fe54a679c5bff6646febe2654c5695')
+async function getWeather(user, weather) {
+    const wea = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + user.location + '&units=metric&lang=de&appid=' + weather.openWeather['key']);
     const weaData = await wea.json();
 
     createWeather(weaData);
@@ -121,8 +114,8 @@ function createWeather(weatherData) {
     document.getElementById("loc-flag").src = "https://www.countryflags.io/" + weatherData.sys['country'] + "/flat/64.png";
 }
 
-async function getRepos(username) {
-    const resp = await fetch(APIURL + username + "/repos");
+async function getRepos(username, json) {
+    const resp = await fetch(json.github.url + username + "/repos");
     const respData = await resp.json();
 
     addReposToCard(respData);
@@ -133,7 +126,7 @@ function addReposToCard(repos) {
 
     repos
         .sort((a, b) => a.stargazers_count - b.stargazers_count)
-        .slice(0, 5)
+        .slice(0, 4)
         .forEach(repo => {
             const repoEl = document.createElement('a');
             repoEl.classList.add('repo');
@@ -144,6 +137,13 @@ function addReposToCard(repos) {
 
             reposEl.appendChild(repoEl);
         })
+}
+
+function setJSONObj(jsonFile) {
+    var request = new XMLHttpRequest();
+    request.open("GET", jsonFile, false);
+    request.send(null);
+    return JSON.parse(request.responseText);
 }
 
 form.addEventListener("submit", (e) => {

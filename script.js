@@ -1,4 +1,4 @@
-const DATA = 'default.json';
+const DATA = 'example-default.json';
 
 const main = document.getElementById('main');
 const form = document.getElementById('form');
@@ -27,6 +27,7 @@ async function getUser(username) {
     getWeather(respData, localJSON);
     getRepos(username, localJSON);
 }
+
 function getYearCreated(user) {
     const yearEl = document.getElementById('year-bg');
     const year = `

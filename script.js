@@ -73,8 +73,6 @@ function createUserCard(user) {
     // const cardHTML ='<div class="card"></div>';
     // main.innerHTML = cardHTML;
 
-
-
 }
 
 function getFollowers(user) {

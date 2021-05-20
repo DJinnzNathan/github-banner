@@ -1,4 +1,5 @@
 const DATA = 'example-default.json';
+const USERDATA = setJSONObj(DATA);
 
 const main = document.getElementById('main');
 const form = document.getElementById('form');
@@ -8,32 +9,35 @@ getUser("DJinnzNathan");
 
 async function getUser(username) {
 
-    var localJSON = setJSONObj(DATA);
-
-    const resp = await fetch(localJSON.github['url'] + username);
+    const resp = await fetch(USERDATA.github.url + username);
     const respData = await resp.json();
 
-    console.log(localJSON.github['url']);
-
     getProfileImage(respData);
-    getYearCreated(respData);
-    getProfileName(respData);
-    getProfileBio(respData);
-    getLocationData(respData);
-    getFollowers(respData);
-    getFollowing(respData);
-    getReposCount(respData);
 
-    getWeather(respData, localJSON);
-    getRepos(username, localJSON);
+    updateElement('year-bg', '<b>' + respData.created_at.slice(0, 4) + '</b>');
+    updateElement('user-name', respData.name);
+    updateElement('user-bio', respData.bio);
+    updateElement('user-location', '<img id="loc-flag"><b>' + respData.location + '</b><i id="weather"></i>');
+    
+    updateLink('user-twitter', 'https://twitter.com/' + respData.twitter_username);
+    updateLink('user-followers', respData.html_url + '?tab=followers', respData.followers);
+    updateLink('user-following', respData.html_url + '?tab=following', respData.following);
+    updateLink('user-repos', respData.html_url + '?tab=repos', respData.public_repos);
+
+
+    getWeather(respData);
+    getRepos(username);
 }
 
-function getYearCreated(user) {
-    const yearEl = document.getElementById('year-bg');
-    const year = `
-<b>${user.created_at.slice(0, 4)}</b>
-`;
-yearEl.innerHTML = year;
+function updateElement(id, innerHTML) {
+    document.getElementById(id).innerHTML = innerHTML;
+}
+
+function updateLink(id, href, innerHTML) {
+    document.getElementById(id).href = href;
+    if (innerHTML !== undefined) {
+        updateElement(id, innerHTML);
+    }
 }
 
 function getProfileImage(user) {
@@ -41,66 +45,12 @@ function getProfileImage(user) {
     const profilePic = `
     <a href="${user.html_url}" target="_blank"><img class="avatar" src="${user.avatar_url}" alt="${user.name}" /></a>
     `;
-    console.log(user.html_url);
     picEl.innerHTML = profilePic;
 }
 
-function getProfileName(user) {
-    const nameEl = document.getElementById('user-name');
-    const name = `
-    ${user.name}<a href="https://twitter.com/${user.twitter_username}" target="_blank"><i class="icon fab fa-twitter"></i></a>
-    `;
-    nameEl.innerHTML = name;
-}
-
-function getProfileBio(user) {
-    const bioEl = document.getElementById('user-bio');
-    const bio = `
-    ${user.bio}
-    `;
-    bioEl.innerHTML = bio;
-}
-
-function getLocationData(user) {
-    const locEl = document.getElementById('user-location');
-    const location = `
-    <img id="loc-flag"><b>${user.location}</b><i id="weather"></i>
-    `;
-    locEl.innerHTML = location;
-}
-
-function createUserCard(user) {
-    // const cardHTML ='<div class="card"></div>';
-    // main.innerHTML = cardHTML;
-
-}
-
-function getFollowers(user) {
-    const followersEl = document.getElementById('user-followers');
-    const followers = `
-    <a href="${user.html_url}?tab=followers" target="_blank">${user.followers}<strong>Followers</strong></a>
-    `;
-    followersEl.innerHTML = followers;
-}
-
-function getFollowing(user) {
-    const followingEl = document.getElementById('user-following');
-    const following = `
-    <a href="${user.html_url}?tab=following" target="_blank">${user.following}<strong>Followers</strong></a>
-    `;
-    followingEl.innerHTML = following;
-}
-
-function getReposCount(user) {
-    const repoCountEl = document.getElementById('user-repos');
-    const repoCount = `
-    <a href="${user.html_url}?tab=repositories" target="_blank">${user.public_repos}<strong>Repos</strong></a>
-    `;
-    repoCountEl.innerHTML = repoCount;
-}
-
-async function getWeather(user, weather) {
-    const wea = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + user.location + '&units=metric&lang=de&appid=' + weather.openWeather['key']);
+async function getWeather(user) {
+    const buildURL = USERDATA.openWeather.url.base.replace("{CITY}", user.location).replace("{APIKEY}", USERDATA.openWeather.key);
+    const wea = await fetch(buildURL);
     const weaData = await wea.json();
 
     createWeather(weaData);
@@ -109,12 +59,12 @@ async function getWeather(user, weather) {
 function createWeather(weatherData) {
     const weaEl = document.getElementById("weather");
 
-    weaEl.innerHTML = parseInt(weatherData.main['temp']) + "°C" + '<img id="weather-icon" src="http://openweathermap.org/img/wn/' + weatherData.weather[0]['icon'] + '@2x.png">';
-    document.getElementById("loc-flag").src = "https://www.countryflags.io/" + weatherData.sys['country'] + "/flat/64.png";
+    weaEl.innerHTML = parseInt(weatherData.main.temp) + "°C" + '<img id="weather-icon" src="' + USERDATA.openWeather.url.icon.replace("{ICON}", weatherData.weather[0]['icon']) + '">';
+    document.getElementById("loc-flag").src = USERDATA.openWeather.url.flag.replace("{FLAG}", weatherData.sys.country);
 }
 
-async function getRepos(username, json) {
-    const resp = await fetch(json.github.url + username + "/repos");
+async function getRepos(username) {
+    const resp = await fetch(USERDATA.github.url + username + "/repos");
     const respData = await resp.json();
 
     addReposToCard(respData);

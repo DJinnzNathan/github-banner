@@ -1,9 +1,9 @@
 {
     "openWeather": {
         "url": {
-            "base": "api.openweathermap.org/data/2.5/weather?q={CITYNAME}&units=metric&lang=de&appid={APIKEY}",
-            "icon": "http://openweathermap.org/img/wn/{WEATHERICON}@2x.png",
-            "flag": "https://www.countryflags.io/{FLAGICON}/flat/64.png"
+            "base": "https://api.openweathermap.org/data/2.5/weather?q={CITY}&units=metric&lang=de&appid={APIKEY}",
+            "icon": "https://openweathermap.org/img/wn/{ICON}@2x.png",
+            "flag": "https://www.countryflags.io/{FLAG}/flat/64.png"
         },
         "key": "d2fe54a679c5bff6646febe2654c5695"
     },

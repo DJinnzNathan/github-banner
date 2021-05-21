@@ -7,28 +7,6 @@ const search = document.getElementById('search');
 
 getUser("DJinnzNathan");
 
-// async function getUser(username) {
-
-//     const resp = await fetch(USERDATA.github.url + username);
-//     const respData = await resp.json();
-
-//     getProfileImage(respData);
-
-//     updateElement('year-bg', '<b>' + respData.created_at.slice(0, 4) + '</b>');
-//     updateElement('user-name', respData.name);
-//     updateElement('user-bio', respData.bio);
-//     updateElement('user-location', '<img id="loc-flag"><b>' + respData.location + '</b><i id="weather"></i>');
-    
-//     updateLink('user-twitter', 'https://twitter.com/' + respData.twitter_username);
-//     updateLink('user-followers', respData.html_url + '?tab=followers', respData.followers);
-//     updateLink('user-following', respData.html_url + '?tab=following', respData.following);
-//     updateLink('user-repos', respData.html_url + '?tab=repos', respData.public_repos);
-
-
-//     getWeather(respData);
-//     getRepos(username);
-// }
-
 async function getUser(username) {
 
     fetch(USERDATA.github.url + username)

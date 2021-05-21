@@ -83,6 +83,7 @@ input:focus {
 
 .repo {
     background-color: #2a2a72;
+    font-weight     : 600;
     border-radius   : 5px;
     display         : inline-block;
     color           : white;
@@ -91,6 +92,12 @@ input:focus {
     margin-right    : 0.5rem;
     margin-bottom   : 0.5rem;
     text-decoration : none;
+}
+
+a.repo:hover {
+    background-color: #2a2a72b8;
+    box-shadow      : 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition      : box-shadow 0.1s ease-in-out;
 }
 
 .year-bg {
@@ -143,14 +150,32 @@ a:link {
 }
 
 #loc-flag {
-    border-radius: 10em;
-    display: inline-block;
-    /* background-image: url(https://www.countryflags.io/DE/flat/64.png); */
-    height: 1em;
-    width: 1em;
-    vertical-align: sub;
-    margin-bottom: 2px;
-    margin-right: 2px;
-    background-size: 175%;
+    border-radius      : 10em;
+    display            : inline-block;
+    height             : 1em;
+    width              : 1em;
+    vertical-align     : sub;
+    margin-bottom      : 2px;
+    margin-right       : 2px;
+    background-size    : 175%;
     background-position: center;
+}
+
+.info a::after {
+    margin-left: 0.3rem;
+    margin-right: 1rem;
+    font-weight: 700;
+    font-size: small;
+}
+
+#user-followers::after {
+    content: "Followers";
+}
+
+#user-following::after {
+    content: "Following";
+}
+
+#user-repos::after {
+    content: "Repos";
 }

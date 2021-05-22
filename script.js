@@ -61,7 +61,7 @@ async function getWeather(user) {
 function createWeather(weatherData) {
     const weaEl = document.getElementById("weather");
 
-    weaEl.innerHTML = parseInt(weatherData.main.temp) + "°C" + '<img id="weather-icon" src="' + USERDATA.openWeather.url.icon.replace("{ICON}", weatherData.weather[0]['icon']) + '">';
+    weaEl.innerHTML = parseInt(weatherData.main.temp) + "°C" + '<img id="weather-icon" src="' + USERDATA.openWeather.url.icon.replace("{ICON}", weatherData.weather[0]['icon']) + '" title="' + weatherData.weather[0]['description'] + '">';
     document.getElementById("loc-flag").src = USERDATA.openWeather.url.flag.replace("{FLAG}", weatherData.sys.country);
 }
 

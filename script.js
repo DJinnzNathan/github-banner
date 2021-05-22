@@ -13,11 +13,12 @@ async function getUser(username) {
     .then(response => response.json())
     .then(respData => {
         getProfileImage(respData);
+        // getLocationImage(respData);
 
         updateElement('year-bg', '<b>' + respData.created_at.slice(0, 4) + '</b>');
         updateElement('user-name', respData.name);
         updateElement('user-bio', respData.bio);
-        updateElement('user-location', '<img id="loc-flag"><b>' + respData.location + '</b><i id="weather"></i>');
+        updateElement('user-location', '<b>' + respData.location + '</b><i id="weather"></i>');
         
         updateLink('user-twitter', 'https://twitter.com/' + respData.twitter_username);
         updateLink('user-followers', respData.html_url + '?tab=followers', respData.followers);
@@ -50,6 +51,17 @@ function getProfileImage(user) {
     picEl.innerHTML = profilePic;
 }
 
+function getLocationImage(user) {
+    const flagEl = document.getElementById('img-flag');
+    const profileFlag = `
+    <img id="loc-flag" src="${USERDATA.openWeather.url.flag.replace("{FLAG}", weatherData.sys.country)}">
+    `;
+    flagEl.innerHTML = profileFlag;
+
+    console.log(USERDATA.openWeather.url.flag.replace("{FLAG}", weatherData.sys.country));
+    document.getElementById("loc-flag").src = USERDATA.openWeather.url.flag.replace("{FLAG}", weatherData.sys.country);
+}
+
 async function getWeather(user) {
     const buildURL = USERDATA.openWeather.url.base.replace("{CITY}", user.location).replace("{APIKEY}", USERDATA.openWeather.key);
     const wea = await fetch(buildURL);
@@ -62,7 +74,7 @@ function createWeather(weatherData) {
     const weaEl = document.getElementById("weather");
 
     weaEl.innerHTML = parseInt(weatherData.main.temp) + "°C" + '<img id="weather-icon" src="' + USERDATA.openWeather.url.icon.replace("{ICON}", weatherData.weather[0]['icon']) + '" title="' + weatherData.weather[0]['description'] + '">';
-    document.getElementById("loc-flag").src = USERDATA.openWeather.url.flag.replace("{FLAG}", weatherData.sys.country);
+    // getLocationImage(weatherData);
 }
 
 async function getRepos(username) {

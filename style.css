@@ -46,10 +46,25 @@ input:focus {
 }
 
 .avatar {
+    position: relative;
+    display: inline;
     border       : 10px solid #2a2a72;
     border-radius: 50%;
     height       : 150px;
     width        : 150px;
+}
+
+.img-profile {
+    z-index: 1;
+}
+
+#img-flag {
+    position:absolute;
+    right:33%;
+    top:43%;
+    max-width: 10%;
+    border       : 10px solid #2a2a72;
+    border-radius: 50%;
 }
 
 .user-info {
@@ -120,10 +135,6 @@ a.repo:hover {
 
 main {
     z-index: 2;
-}
-
-.img-profile {
-    z-index: 1;
 }
 
 a:visited,
